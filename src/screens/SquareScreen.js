@@ -9,22 +9,37 @@ const SquareScreen = () => {
     const [red ,setRed] = useState(0);
     const [green ,setGreen] = useState(0);
     const [blue ,setBlue] = useState(0);
+
+const setColor =(color , change) => {
+
+   switch (color) {
+      case 'red':
+         red+change >=255 || red+change <= 0 ? null :setRed(red+change)
+         return
+      case 'green':
+         green+change >=255 || green+change <= 0 ? null :setGreen(green+change)
+         return
+      case 'blue':
+         blue+change >=255 || blue+change <= 0 ? null :setBlue(blue+change)
+         return
+   } 
+}
     
  return(
  <View>
     <ColorDegree 
-    onIncrement={()=>{if (red<255)setRed(red+COLOR_DELTA)}} 
-    onDecrement={()=>{if (red>0)setRed(red-COLOR_DELTA)}} 
+    onIncrement={()=>{setColor('red',COLOR_DELTA)}} 
+    onDecrement={()=>{setColor('red',-1*COLOR_DELTA)}} 
     color="red"
     />
     <ColorDegree 
-    onIncrement={()=>{if (green<255)setGreen(green+COLOR_DELTA)}} 
-    onDecrement={()=>{if (green>0)setGreen(green-COLOR_DELTA)}} 
+    onIncrement={()=>{setColor('green',COLOR_DELTA)}} 
+    onDecrement={()=>{setColor('green',-1*COLOR_DELTA)}} 
     color="green"
     />
     <ColorDegree 
-    onIncrement={()=>{if (blue<255)setBlue(blue+COLOR_DELTA)}} 
-    onDecrement={()=>{if (blue>0)setBlue(blue-COLOR_DELTA)}} 
+    onIncrement={()=>{setColor('blue',COLOR_DELTA)}} 
+    onDecrement={()=>{setColor('blue',-1*COLOR_DELTA)}} 
     color="blue"
     />
     <View style={{width:100, height:100, backgroundColor:`rgb(${red},${green},${blue})`}}/>
